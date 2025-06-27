@@ -29,22 +29,15 @@ python evaluate_lora.py \
     --max_seq_length 512 \
     --per_device_eval_batch_size 4
 ```
+
 ### merged
 ```
-python merge_lora.py \
-    --base_model_path "./models/uncensoredai_UncensoredLM-DeepSeek-R1-Distill-Qwen-14B" \
-    --lora_adapter_paths "./lora_finetuned_7B_uka/lora_adapter" \
-    --output_merged_model_path "./merged_model_uka_scaled" \
-    --scaling_factor 0.8 # ลดผลกระทบของ LoRA ลง 20%
-```
-
-muti LoRA Adapters
-```
-python merge_lora.py \
-    --base_model_path "./models/uncensoredai_UncensoredLM-DeepSeek-R1-Distill-Qwen-14B" \
-    --lora_adapter_paths "./lora_finetuned_7B_uka/lora_adapter" "./lora_another_task/lora_adapter" \
-    --output_merged_model_path "./merged_model_multi_lora" \
-    --scaling_factor 1.0 # ใช้ scaling factor รวม 1.0
+python evaluate_lora.py \
+    --eval_mode merged \
+    --merged_model_path "./merged_deepseek_14B_uka/" \
+    --eval_dataset_path "./dataset/uka.json" \
+    --max_seq_length 512 \
+    --per_device_eval_batch_size 4
 ```
 
 ### Base Model + LoRA Adapter 
@@ -58,14 +51,23 @@ python evaluate_lora.py \
     --per_device_eval_batch_size 4
 ```
 
-## merge
+### merged
 ```
 python merge_lora.py \
     --base_model_path "./models/uncensoredai_UncensoredLM-DeepSeek-R1-Distill-Qwen-14B" \
-    --lora_adapter_path "./lora_finetuned_14B_4bit_uka_uncen/lora_adapter" \
-    --output_merged_model_path "./merged_deepseek_14B_uka"
+    --lora_adapter_paths "./lora_finetuned_7B_uka/lora_adapter" \
+    --output_merged_model_path "./merged_model_uka_scaled" \
+    --scaling_factor 0.8 # ลดผลกระทบของ LoRA ลง 20%
 ```
 
+## muti LoRA Adapters
+```
+python merge_lora.py \
+    --base_model_path "./models/uncensoredai_UncensoredLM-DeepSeek-R1-Distill-Qwen-14B" \
+    --lora_adapter_paths "./lora_finetuned_7B_uka/lora_adapter" "./lora_another_task/lora_adapter" \
+    --output_merged_model_path "./merged_model_multi_lora" \
+    --scaling_factor 1.0 # ใช้ scaling factor รวม 1.0
+```
 ## chat
 ```
 python chat_bot.py \
