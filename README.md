@@ -57,3 +57,13 @@ python merge_lora.py \
     --lora_adapter_path "./lora_finetuned_14B_4bit_uka_uncen/lora_adapter" \
     --output_merged_model_path "./merged_deepseek_14B_uka"
 ```
+
+## chat
+```
+python chat_bot.py \
+    --model_path "./models/uncensoredai_UncensoredLM-DeepSeek-R1-Distill-Qwen-14B" \
+    --lora_adapter_path "./lora_finetuned_14B_4bit_uka_uncen/lora_adapter" \
+    --max_new_tokens 256 \
+    --temperature 0.7 \
+    --do_sample
+```
